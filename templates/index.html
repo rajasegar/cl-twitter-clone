@@ -1,0 +1,30 @@
+{% extends "layouts/default.html" %}
+{% block title %}Twitter clone in Common Lisp{% endblock %}
+{% block content %}
+<nav class="navbar navbar-dark bg-dark shadow-sm py-0">
+  <div class="container">
+    <a class="navbar-brand" href="#">cl-twitter</a>
+    <span class="navbar-text text-white">{{name}}</span>
+  </div>
+</nav>
+<div class="container">
+  <div class="row justify-content-center">
+    <main class="col-10">
+      <p class="text-center mt-2">A Twitter clone in Common Lisp</p>
+      <div hx-ws="connect:/tweet">
+        <form hx-ws="send:submit">
+          <!-- <input class="form-control" name="username" type="hidden" value={{name}} readonly/> -->
+          <div class="mb-3 row">
+            <label for="txtMessage">Message:</label>
+            <textarea id="txtMessage" class="form-control" cols="30" name="message" rows="3" required="true"></textarea>
+          </div>
+          <div class="d-grid gap-2 col-3 mx-auto mb-3">
+            <button class="btn btn-primary text-center">Tweet</button>
+          </div>
+        </form>
+      </div>
+      <div id="timeline"></div>
+    </main>
+  </div>
+</div>
+{% endblock %}
