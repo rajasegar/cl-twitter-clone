@@ -81,9 +81,10 @@
 (defun broadcast-tweet (connection message)
 
   (let ((message (format nil *post*
-                         (gethash connection *connections*)
+                         ;; (gethash connection *connections*)
+			 (cdr (assoc :username (cl-json:decode-json-from-string message)))
                          (tweet-time)
-                         (cdr (car (cl-json:decode-json-from-string message))))))
+                         (cdr (assoc :message (cl-json:decode-json-from-string message))))))
     (loop :for con :being :the :hash-key :of *connections* :do
           (websocket-driver:send con message))))
 
@@ -94,9 +95,10 @@
 
     (on :message ws
         (lambda (message)
-          (format t "~a~%" message)
+          (format t "~a~%" (assoc :username (cl-json:decode-json-from-string message)))
           ;; construct tweet
-          (let ((tweet (list :message (cdr (car (cl-json:decode-json-from-string message)))
+          (let ((tweet (list :message (cdr (assoc :message (cl-json:decode-json-from-string message)))
+			     :username (cdr (assoc :username (cl-json:decode-json-from-string message)))
                       )))
 
           (push tweet *tweets*)

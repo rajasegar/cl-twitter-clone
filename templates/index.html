@@ -13,7 +13,7 @@
       <p class="text-center mt-2">A Twitter clone in Common Lisp</p>
       <div hx-ws="connect:/tweet">
         <form hx-ws="send:submit">
-          <!-- <input class="form-control" name="username" type="hidden" value={{name}} readonly/> -->
+          <input class="form-control" name="username" type="hidden" value="{{name}}" readonly/>
           <div class="mb-3 row">
             <label for="txtMessage">Message:</label>
             <textarea id="txtMessage" class="form-control" cols="30" name="message" rows="3" required="true"></textarea>
