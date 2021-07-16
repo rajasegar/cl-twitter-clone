@@ -5,8 +5,8 @@
         :cl-twitter-clone.config
         :cl-twitter-clone.view
         :cl-twitter-clone.db
-   :websocket-driver
-   :cl-who)
+        :websocket-driver
+        :cl-who)
   (:export :*web*))
 (in-package :cl-twitter-clone.web)
 

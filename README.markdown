@@ -2,6 +2,7 @@
 
 A small Twitter clone demo application in Common Lisp
 
+![cl-twitter-clone-demo.gif](cl-twitter-clone-demo.gif)
 
 ## Usage
 ```lisp
