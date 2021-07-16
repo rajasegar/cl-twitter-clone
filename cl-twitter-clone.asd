@@ -19,7 +19,9 @@
                "datafly"
                "sxql"
                "websocket-driver"
-               "cl-json")
+               "cl-json"
+               "local-time"
+               "cl-who")
   :components ((:module "src"
                 :components
                 ((:file "main" :depends-on ("config" "view" "db"))
