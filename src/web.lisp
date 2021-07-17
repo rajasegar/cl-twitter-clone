@@ -47,7 +47,7 @@
 (defmacro likes-component (tweet)
   `(htm
     (:button
-     :class "btn btn-link text-decoration-none"
+     :class "btn btn-link ps-0 text-decoration-none"
      :id (concatenate 'string "like-" (write-to-string (getf ,tweet :id)))
      :type "button"
      :hx-post (concatenate 'string "/like/" (write-to-string (getf ,tweet :id)))
@@ -70,10 +70,14 @@
            :id (concatenate 'string "tweet-" (write-to-string (getf ,tweet :id)))
                 (:div :class "card-body"
                       (:div :class "d-flex"
-                            (:img :class "me-4" :alt "avatar" :src (concatenate 'string *avatar-url* (getf ,tweet :username)))
+                            (:img
+                             :class "me-4"
+                             :alt "avatar"
+                             :width "108"
+                             :src (concatenate 'string *avatar-url* (getf ,tweet :username)))
                             (:div
-                             (:h5 :class "card-title text-muted" (str (getf ,tweet :username))
-                                  (:small (str (getf tweet :time))))
+                             (:h5 :class "card-title" (str (getf ,tweet :username))
+                                  (:small :class "text-muted" (str (getf tweet :time))))
                              (:div :class "card-text lead mb-2" (str (getf ,tweet :message)))
                              (likes-component ,tweet)
                              (retweets-component ,tweet))))))))
@@ -107,7 +111,6 @@
     ;; on socket message, create new tweet and broadcast
     (on :message ws
         (lambda (message)
-          (format t "~a~%" (assoc :username (cl-json:decode-json-from-string message)))
           ;; construct tweet
           (let ((tweet (list :message (cdr (assoc :message (cl-json:decode-json-from-string message)))
                              :username (cdr (assoc :username (cl-json:decode-json-from-string message)))
