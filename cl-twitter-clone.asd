@@ -1,7 +1,7 @@
 (defsystem "cl-twitter-clone"
   :version "0.1.0"
   :author "Rajasegar Chandran"
-  :license ""
+  :license "MIT"
   :depends-on ("clack"
                "lack"
                "caveman2"
